@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MapViewController: UIViewController {
+class MapViewController: SharedViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

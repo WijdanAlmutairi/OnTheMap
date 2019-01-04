@@ -37,8 +37,8 @@ struct Constants {
     
     struct Parse {
         static let ApiScheme = "https"
-        static let ApiHost = "https://onthemap-api.udacity.com"
-        static let ApiPath = "/v1"
+        static let ApiHost = "parse.udacity.com"
+        static let ApiPath = "/parse/classes"
     }
     
     struct ParseParameterKeys {
