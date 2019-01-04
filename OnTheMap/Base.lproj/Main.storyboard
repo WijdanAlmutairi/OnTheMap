@@ -96,12 +96,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133.59999999999999" y="127.28635682158921"/>
+            <point key="canvasLocation" x="1201" y="126"/>
         </scene>
-        <!--View Controller-->
+        <!--Table View Controller-->
         <scene sceneID="fnn-hR-XCT">
             <objects>
-                <viewController id="Bbg-ow-Nll" sceneMemberID="viewController">
+                <viewController id="Bbg-ow-Nll" customClass="TableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E75-az-DzM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -133,7 +133,6 @@
         <!--Navigation Controller-->
         <scene sceneID="YDH-2L-ymC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="moz-7q-MX0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="map" automaticallyAdjustsScrollViewInsets="NO" id="b0C-ZC-8uF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="icon_mapview-selected" selectedImage="icon_mapview-selected" id="0KL-cg-WpB"/>
                     <toolbarItems/>
@@ -146,13 +145,13 @@
                         <segue destination="Hf6-bY-b7I" kind="relationship" relationship="rootViewController" id="vtk-pX-GYU"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="moz-7q-MX0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3452" y="-199.25037481259372"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TYQ-Hw-CHZ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BcW-0t-d8S" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eib-9c-foF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="icon_listview-selected" selectedImage="icon_listview-selected" id="d1M-od-DGj"/>
                     <toolbarItems/>
@@ -165,6 +164,7 @@
                         <segue destination="Bbg-ow-Nll" kind="relationship" relationship="rootViewController" id="TvL-OF-yYu"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BcW-0t-d8S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3452" y="453.82308845577217"/>
         </scene>
@@ -174,6 +174,7 @@
                 <tabBarController storyboardIdentifier="TapBarController" automaticallyAdjustsScrollViewInsets="NO" id="HN2-y4-u7p" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yt0-jM-kgC">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -184,7 +185,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k59-cm-5KW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2512.8000000000002" y="-199.25037481259372"/>
+            <point key="canvasLocation" x="2460" y="127"/>
         </scene>
     </scenes>
     <resources>

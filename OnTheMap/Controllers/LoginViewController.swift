@@ -67,15 +67,26 @@ class LoginViewController: UIViewController {
             }
             
             guard let session = parsedResult [Constants.UdacityResponseKeys.session] as? [String: AnyObject] else {
-               print ("Cannot find key 'session' in \(parsedResult)")
+               print ("Cannot find key '\(Constants.UdacityResponseKeys.session)' in \(parsedResult)")
                 return
             }
             guard let sessionID = session[Constants.UdacityResponseKeys.sessionID] as? String  else {
-                print ("Cannot find key '\(Constants.UdacityResponseKeys.sessionID)' in \(parsedResult)")
+                print ("Cannot find key '\(Constants.UdacityResponseKeys.sessionID)' in \(session)")
+                return
+            }
+            
+            guard let account = parsedResult [Constants.UdacityResponseKeys.userAccount] as? [String: AnyObject] else {
+                print ("Cannot find key '\(Constants.UdacityResponseKeys.userAccount)' in \(parsedResult)")
+                return
+            }
+            guard let userID = account[Constants.UdacityResponseKeys.userID] as? String  else {
+                print ("Cannot find key '\(Constants.UdacityResponseKeys.userID)' in \(account)")
                 return
             }
             
             self.appDelegate.sessionID = sessionID
+            self.appDelegate.UserID = userID
+            //print(userID)
              DispatchQueue.main.async {
                 let mapController = self.storyboard?.instantiateViewController(withIdentifier: "TapBarController") as! UITabBarController
                 self.present(mapController, animated: true, completion: nil)

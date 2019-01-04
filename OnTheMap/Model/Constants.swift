@@ -29,6 +29,8 @@ struct Constants {
     struct UdacityResponseKeys {
         static let session = "session"
         static let sessionID = "id"
+        static let userAccount = "account"
+        static let userID = "key"
         
     }
     
