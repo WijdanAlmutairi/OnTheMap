@@ -13,6 +13,7 @@
 		042C3BD521DBDF22004FA7F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 042C3BD421DBDF22004FA7F0 /* Assets.xcassets */; };
 		042C3BD821DBDF22004FA7F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042C3BD621DBDF22004FA7F0 /* LaunchScreen.storyboard */; };
 		042C3BE021DBF750004FA7F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042C3BDF21DBF74F004FA7F0 /* Constants.swift */; };
+		04F3E6EF21DEC8D7006608C9 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F3E6EE21DEC8D6006608C9 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		042C3BD721DBDF22004FA7F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		042C3BD921DBDF22004FA7F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		042C3BDF21DBF74F004FA7F0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		04F3E6EE21DEC8D6006608C9 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				042C3BCD21DBDF1B004FA7F0 /* AppDelegate.swift */,
 				042C3BCF21DBDF1B004FA7F0 /* LoginViewController.swift */,
 				042C3BDF21DBF74F004FA7F0 /* Constants.swift */,
+				04F3E6EE21DEC8D6006608C9 /* MapViewController.swift */,
 				042C3BD121DBDF1B004FA7F0 /* Main.storyboard */,
 				042C3BD421DBDF22004FA7F0 /* Assets.xcassets */,
 				042C3BD621DBDF22004FA7F0 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				042C3BD021DBDF1B004FA7F0 /* LoginViewController.swift in Sources */,
 				042C3BCE21DBDF1B004FA7F0 /* AppDelegate.swift in Sources */,
 				042C3BE021DBF750004FA7F0 /* Constants.swift in Sources */,
+				04F3E6EF21DEC8D7006608C9 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

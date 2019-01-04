@@ -76,11 +76,15 @@ class LoginViewController: UIViewController {
             }
             
             self.appDelegate.sessionID = sessionID
-            // In This Line move to the other view controller
-            print(sessionID)
+             DispatchQueue.main.async {
+                let mapController = self.storyboard?.instantiateViewController(withIdentifier: "TapBarController") as! UITabBarController
+                self.present(mapController, animated: true, completion: nil)
+            }
             
+            print(sessionID)
         }
         task.resume()
+        
     }
     
     @IBAction func signupButtonPressed(_ sender: Any) {
