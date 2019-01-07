@@ -15,6 +15,8 @@
 		042C3BE021DBF750004FA7F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042C3BDF21DBF74F004FA7F0 /* Constants.swift */; };
 		04D44B2221DFA1AE008AD56A /* SharedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D44B2121DFA1AE008AD56A /* SharedViewController.swift */; };
 		04D44B2421DFA1F0008AD56A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D44B2321DFA1F0008AD56A /* TableViewController.swift */; };
+		04D44B2621E00E27008AD56A /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D44B2521E00E26008AD56A /* StudentInformation.swift */; };
+		04DA58C621E2580100AE6A59 /* NetworkMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DA58C521E2580000AE6A59 /* NetworkMethod.swift */; };
 		04F3E6EF21DEC8D7006608C9 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F3E6EE21DEC8D6006608C9 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +31,8 @@
 		042C3BDF21DBF74F004FA7F0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		04D44B2121DFA1AE008AD56A /* SharedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViewController.swift; sourceTree = "<group>"; };
 		04D44B2321DFA1F0008AD56A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		04D44B2521E00E26008AD56A /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
+		04DA58C521E2580000AE6A59 /* NetworkMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMethod.swift; sourceTree = "<group>"; };
 		04F3E6EE21DEC8D6006608C9 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				042C3BDF21DBF74F004FA7F0 /* Constants.swift */,
+				04D44B2521E00E26008AD56A /* StudentInformation.swift */,
+				04DA58C521E2580000AE6A59 /* NetworkMethod.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -171,6 +177,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D44B2621E00E27008AD56A /* StudentInformation.swift in Sources */,
+				04DA58C621E2580100AE6A59 /* NetworkMethod.swift in Sources */,
 				042C3BD021DBDF1B004FA7F0 /* LoginViewController.swift in Sources */,
 				04D44B2421DFA1F0008AD56A /* TableViewController.swift in Sources */,
 				04D44B2221DFA1AE008AD56A /* SharedViewController.swift in Sources */,

@@ -10,12 +10,12 @@ import UIKit
 
 class SharedViewController: UIViewController {
 
-    var appDelegate: AppDelegate!
+    static var appDelegate: AppDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        appDelegate = UIApplication.shared.delegate as? AppDelegate
+        SharedViewController.appDelegate = UIApplication.shared.delegate as? AppDelegate
         
         self.navigationItem.title = "On the Map"
         
@@ -43,7 +43,7 @@ class SharedViewController: UIViewController {
     
     @objc func logoutTapped(){
         
-        var request = URLRequest(url: appDelegate.udacityURLFromParameter([:]))
+        var request = URLRequest(url: SharedViewController.appDelegate.udacityURLFromParameter([:]))
         
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
@@ -55,7 +55,7 @@ class SharedViewController: UIViewController {
         if let xsrfCookie = xsrfCookie {
             request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
-        let task = appDelegate.sharedSession.dataTask(with: request) { data, response, error in
+        let task = SharedViewController.appDelegate.sharedSession.dataTask(with: request) { data, response, error in
             guard (error == nil) else {
                 print ("There was an error with your request: \(error!)")
                 return
@@ -63,7 +63,7 @@ class SharedViewController: UIViewController {
             
             let range = (5..<data!.count)
             _ = data?.subdata(in: range) /* subset response data! */
-            self.appDelegate.sessionID = ""
+            SharedViewController.appDelegate.sessionID = ""
             DispatchQueue.main.async {
                 let loginController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! UIViewController
                 self.present(loginController, animated: true, completion: nil)

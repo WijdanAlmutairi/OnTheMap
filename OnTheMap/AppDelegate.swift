@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var studentsLocations: [StudentInformation] = []
     var sharedSession = URLSession.shared
     var sessionID: String? = nil
     var UserID: String? = nil 
@@ -32,6 +33,23 @@ extension AppDelegate {
         components.scheme = Constants.Udacity.ApiScheme
         components.host = Constants.Udacity.ApiHost
         components.path = Constants.Udacity.ApiPath + (withPathExtension ?? "")
+        components.queryItems = [URLQueryItem]()
+        
+        for (key, value) in parameters {
+            let queryItem = URLQueryItem (name: key, value: "\(value)")
+            components.queryItems!.append(queryItem)
+        }
+        
+        return components.url!
+    }
+    
+    
+    func parseURLFromParameter(_ parameters: [String: AnyObject], withPathExtension: String? = nil) -> URL {
+        
+        var components = URLComponents()
+        components.scheme = Constants.Parse.ApiScheme
+        components.host = Constants.Parse.ApiHost
+        components.path = Constants.Parse.ApiPath + (withPathExtension ?? "")
         components.queryItems = [URLQueryItem]()
         
         for (key, value) in parameters {
