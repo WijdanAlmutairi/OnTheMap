@@ -161,10 +161,27 @@
                     <view key="view" contentMode="scaleToFill" id="Ddv-sJ-lwq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7px-Rj-uXd">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Hf6-bY-b7I" id="1ih-Jm-neP"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="7px-Rj-uXd" firstAttribute="bottom" secondItem="YxN-jp-BBU" secondAttribute="bottom" id="0We-7k-8rW"/>
+                            <constraint firstItem="7px-Rj-uXd" firstAttribute="top" secondItem="YxN-jp-BBU" secondAttribute="top" id="2L6-Xi-Y1O"/>
+                            <constraint firstItem="7px-Rj-uXd" firstAttribute="leading" secondItem="YxN-jp-BBU" secondAttribute="leading" id="IDU-i8-WDW"/>
+                            <constraint firstItem="7px-Rj-uXd" firstAttribute="trailing" secondItem="YxN-jp-BBU" secondAttribute="trailing" id="Zza-ii-TMq"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="YxN-jp-BBU"/>
                     </view>
                     <navigationItem key="navigationItem" id="gaD-iC-o3w"/>
+                    <connections>
+                        <outlet property="mapView" destination="7px-Rj-uXd" id="n6i-le-2O0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eMW-zO-Hzy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
