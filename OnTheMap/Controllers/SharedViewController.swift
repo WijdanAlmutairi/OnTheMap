@@ -34,7 +34,8 @@ class SharedViewController: UIViewController {
     }
     
     @objc func addTapped(){
-        print("Add")
+        let InformationPostingVc = self.storyboard?.instantiateViewController(withIdentifier: "InformationPostingViewController") as! InformationPostingViewController
+        self.present(InformationPostingVc, animated: true, completion: nil)
     }
     
     @objc func refreshTapped(){

@@ -126,8 +126,63 @@ class NetworkMethod: UIViewController {
     task.resume()
     }
 }
+    func postStudentLocation (studentLocation: StudentInformation, completionHandler: @escaping (_ result: Bool, _ message: String, _ error: Error?)->()){
+        
+        var location = studentLocation
+        
+        if let appDelegate = appDelegate {
+            var request = URLRequest(url: appDelegate.parseURLFromParameter([:] as [String : AnyObject], withPathExtension: "/StudentLocation"))
+        request.httpMethod = "POST"
+        request.addValue(Constants.ParseParameterKeys.parseApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(Constants.ParseParameterKeys.RESTAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"Dan\", \"lastName\": \"Cooper\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".data(using: .utf8)
 
+        let task = appDelegate.sharedSession.dataTask(with: request) { data, response, error in
+            guard (error == nil) else {
+                completionHandler (false, "", error)
+                return
+            }
+            
+            /* GUARD: Did we get a successful 2XX response? */
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                completionHandler (false, "Your request returned a status code other than 2xx!", error)
+                return
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                completionHandler (false, "No data was returned by the request!", error)
+                
+                return
+            }
+            
+            let parsedResult: [String:AnyObject]!
+            do {
+                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:AnyObject]
+                
+            } catch {
+                completionHandler (false, "Could not parse the data as JSON: '\(data)'", error)
+                return
+            }
+            
+            guard let studentsLocationDate = parsedResult["createdAt"] as? String else {
+                completionHandler (false, "Cannot find key 'createdAt' in \(parsedResult)", error)
+                return
+            }
+            guard let studentsLocationID = parsedResult["objectId"] as? String else {
+                completionHandler (false, "Cannot find key 'objectId' in \(parsedResult)", error)
+                return
+            }
+            location.createdAt = studentsLocationDate
+            location.objectId = studentsLocationID
+            completionHandler (true, "", nil)
+            //print(String(data: data, encoding: .utf8)!)
+        }
+        task.resume()
+    }
 
+    }
 func convertToStruct (studentDictionary: [[String: AnyObject]] ){
     
     for studentLocation in studentDictionary {
