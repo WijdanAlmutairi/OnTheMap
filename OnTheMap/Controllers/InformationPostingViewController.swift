@@ -15,19 +15,28 @@ class InformationPostingViewController: UIViewController {
     var lon = 0.0
     
     var myKeyboard = Keyboard()
-    //var alert = Alert()
+     var activityView = UIActivityIndicatorView(style: .gray)
     
     @IBOutlet weak var mapString: UITextField!
     @IBOutlet weak var urlLink: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        myKeyboard.configureTextField(textField: mapString!)
         myKeyboard.configureTextField(textField: urlLink!)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        myKeyboard.subscribeToKeyboardNotifications()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        myKeyboard.unsubscribeFromKeyboardNotifications()
     }
 
     @IBAction func findLocationPressed(_ sender: Any) {
+        showActivityIndicatory()
         guard !mapString.text!.isEmpty, !urlLink.text!.isEmpty else {
             self.showAlert(message: "Loacation or Link fields are empty")
             print("Loacation or Link fields are empty ")
@@ -36,11 +45,8 @@ class InformationPostingViewController: UIViewController {
         convertToLocation(address: mapString.text!) { (success, message, error) in
             if success == true {
                 DispatchQueue.main.async {
+                    self.activityView.stopAnimating()
                     self.performSegue(withIdentifier: "sendLocation", sender: self)
-                }
-            }else {
-                if error != nil || message.isEmpty {
-                 self.showAlert(message: "Could not post your location")
                 }
             }
         }
@@ -80,4 +86,10 @@ class InformationPostingViewController: UIViewController {
     @IBAction func cancelButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    func showActivityIndicatory() {
+        activityView.center = self.view.center
+        activityView.startAnimating()
+        self.view.addSubview(activityView)
+    }
+    
 }

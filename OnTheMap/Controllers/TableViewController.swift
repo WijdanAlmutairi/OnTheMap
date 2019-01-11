@@ -12,7 +12,7 @@ class TableViewController: SharedViewController, UITableViewDelegate, UITableVie
     
     
    
-    var networkObject = NetworkMethod()
+   var networkObjectSub = NetworkMethod()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -25,7 +25,7 @@ class TableViewController: SharedViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        networkObject.getStudentLocation { (success, message, error) in
+        networkObjectSub.getStudentLocation { (success, message, error) in
             if success == true {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -35,20 +35,22 @@ class TableViewController: SharedViewController, UITableViewDelegate, UITableVie
 
 }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return networkObject.appDelegate!.studentsLocations.count
+        return networkObjectSub.appDelegate!.studentsLocations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentLocationCell", for: indexPath)
-        cell.textLabel?.text = "\(networkObject.appDelegate!.studentsLocations[indexPath.row].firstName) \(networkObject.appDelegate!.studentsLocations[indexPath.row].lastName)"
-        cell.detailTextLabel?.text = "\(networkObject.appDelegate!.studentsLocations[indexPath.row].mediaURL)"
+        cell.textLabel?.text = "\(networkObjectSub.appDelegate!.studentsLocations[indexPath.row].firstName) \(networkObjectSub.appDelegate!.studentsLocations[indexPath.row].lastName)"
+        cell.detailTextLabel?.text = "\(networkObjectSub.appDelegate!.studentsLocations[indexPath.row].mediaURL)"
         cell.imageView?.image = UIImage(named: "icon_pin")
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    UIApplication.shared.open(NSURL(string:networkObject.appDelegate!.studentsLocations[indexPath.row].mediaURL)! as URL)
+    UIApplication.shared.open(NSURL(string:networkObjectSub.appDelegate!.studentsLocations[indexPath.row].mediaURL)! as URL)
     }
-    
+    override func refreshTapped() {
+        tableView.reloadData()
+    }
 }

@@ -21,10 +21,16 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        myKeyboard.configureTextField(textField: emailTextField!)
+        myKeyboard.configureTextField(textField: passwordTextField!)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        myKeyboard.configureTextField(textField: passwordTextField!)
+        myKeyboard.subscribeToKeyboardNotifications()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        myKeyboard.unsubscribeFromKeyboardNotifications()
     }
 
     @IBAction func loginButtonPressed(_ sender: Any) {

@@ -64,6 +64,10 @@ class LocationViewController: UIViewController, MKMapViewDelegate {
                 networkObject.postStudentLocation(studentLocation: studentLocation) { (success, message, error) in
                     if success == true {
                         self.dismiss(animated: true, completion: nil)
+                    }else {
+                        if error != nil || message.isEmpty {
+                            self.showAlert(message: "Could not post your location")
+                        }
                     }
                 }
             }

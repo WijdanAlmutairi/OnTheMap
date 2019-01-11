@@ -184,6 +184,38 @@ class NetworkMethod: UIViewController {
     }
 
     }
+     func logout (_ completionHandler: @escaping (_ result: Bool, _ message: String, _ error: Error?)->()){
+        if let appDelegate = appDelegate {
+        var request = URLRequest(url: appDelegate.udacityURLFromParameter([:]))
+        
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let task = appDelegate.sharedSession.dataTask(with: request) { data, response, error in
+            guard (error == nil) else {
+                completionHandler (false, "There was an error with your request: \(error!)", error)
+                print ("There was an error with your request: \(error!)")
+                return
+            }
+            
+            let range = (5..<data!.count)
+            _ = data?.subdata(in: range) /* subset response data! */
+            appDelegate.sessionID = ""
+            completionHandler (true, "", nil)
+            
+        }
+        task.resume()
+        
+        
+      }
+    }
 func convertToStruct (studentDictionary: [[String: AnyObject]] ){
     
     for studentLocation in studentDictionary {

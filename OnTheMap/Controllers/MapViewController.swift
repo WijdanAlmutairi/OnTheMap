@@ -11,21 +11,20 @@ import MapKit
 
 class MapViewController: SharedViewController, MKMapViewDelegate {
 
-    var networkObject = NetworkMethod()
+    var networkObjectSub = NetworkMethod()
     var annotations = [MKPointAnnotation]()
     
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(animated)
-        networkObject.getStudentLocation { (success, message, error) in
+        networkObjectSub.getStudentLocation { (success, message, error) in
             if success == true {
-                let locationsArray = self.networkObject.appDelegate?.studentsLocations
+                let locationsArray = self.networkObjectSub.appDelegate?.studentsLocations
                 
                 for oneLocation in locationsArray! {
                     
@@ -72,10 +71,13 @@ class MapViewController: SharedViewController, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            //let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
                UIApplication.shared.open(NSURL(string: toOpen)! as URL)
             }
         }
+    }
+    
+    override func refreshTapped() {
+        mapView.reloadInputViews()
     }
 }

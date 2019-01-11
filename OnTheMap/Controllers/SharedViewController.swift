@@ -10,12 +10,10 @@ import UIKit
 
 class SharedViewController: UIViewController {
 
-    static var appDelegate: AppDelegate!
+     var networkObject = NetworkMethod()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        SharedViewController.appDelegate = UIApplication.shared.delegate as? AppDelegate
         
         self.navigationItem.title = "On the Map"
         
@@ -39,39 +37,18 @@ class SharedViewController: UIViewController {
     }
     
     @objc func refreshTapped(){
-        print("Refresh")
+        //implementation in child class TableViewController and MapViewController
     }
     
     @objc func logoutTapped(){
-        
-        var request = URLRequest(url: SharedViewController.appDelegate.udacityURLFromParameter([:]))
-        
-        request.httpMethod = "DELETE"
-        var xsrfCookie: HTTPCookie? = nil
-        
-        let sharedCookieStorage = HTTPCookieStorage.shared
-        for cookie in sharedCookieStorage.cookies! {
-            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
-        }
-        if let xsrfCookie = xsrfCookie {
-            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
-        }
-        let task = SharedViewController.appDelegate.sharedSession.dataTask(with: request) { data, response, error in
-            guard (error == nil) else {
-                print ("There was an error with your request: \(error!)")
-                return
+        networkObject.logout { (success, message, error) in
+            if success == true {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+
+                }
             }
-            
-            let range = (5..<data!.count)
-            _ = data?.subdata(in: range) /* subset response data! */
-            SharedViewController.appDelegate.sessionID = ""
-            DispatchQueue.main.async {
-                let loginController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-                self.present(loginController, animated: true, completion: nil)
-            }
-            
         }
-        task.resume()
         
     }
 }
