@@ -1,8 +1,4 @@
 # OnTheMap
-This is the 4th project in udacity nanodegree 
-
-
-#OnTheMap 
 
 ## Project 4 in iOS Nanodegree at Udacity
 
