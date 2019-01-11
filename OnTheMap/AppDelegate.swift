@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var studentsLocations: [StudentInformation] = []
     var sharedSession = URLSession.shared
     var sessionID: String? = nil
     var UserID: String? = nil 

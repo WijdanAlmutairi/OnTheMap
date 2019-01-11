@@ -30,25 +30,29 @@ class TableViewController: SharedViewController, UITableViewDelegate, UITableVie
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-            } else {print("data load faild")}
+            } else {
+                if error != nil || !message.isEmpty {
+                    self.showAlert(message: "Failed to download students locations")
+                }
+            }
     }
 
 }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return networkObjectSub.appDelegate!.studentsLocations.count
+        return AllStudentLocations.studentsLocations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudentLocationCell", for: indexPath)
-        cell.textLabel?.text = "\(networkObjectSub.appDelegate!.studentsLocations[indexPath.row].firstName) \(networkObjectSub.appDelegate!.studentsLocations[indexPath.row].lastName)"
-        cell.detailTextLabel?.text = "\(networkObjectSub.appDelegate!.studentsLocations[indexPath.row].mediaURL)"
+        cell.textLabel?.text = "\(AllStudentLocations.studentsLocations[indexPath.row].firstName) \(AllStudentLocations.studentsLocations[indexPath.row].lastName)"
+        cell.detailTextLabel?.text = "\(AllStudentLocations.studentsLocations[indexPath.row].mediaURL)"
         cell.imageView?.image = UIImage(named: "icon_pin")
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    UIApplication.shared.open(NSURL(string:networkObjectSub.appDelegate!.studentsLocations[indexPath.row].mediaURL)! as URL)
+    UIApplication.shared.open(NSURL(string:AllStudentLocations.studentsLocations[indexPath.row].mediaURL)! as URL)
     }
     override func refreshTapped() {
         tableView.reloadData()

@@ -8,19 +8,14 @@
 
 import UIKit
 
-class NetworkMethod: UIViewController {
+class NetworkMethod {
 
     var appDelegate = UIApplication.shared.delegate as? AppDelegate
-    //var alert = Alert()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-       
-    }
     
-
     func getStudentLocation (_ completionHandler: @escaping (_ result: Bool, _ message: String, _ error: Error?)->()){
+         // clear the array content
+        AllStudentLocations.studentsLocations = []
         
         let methodParameters = [Constants.ParseParameterKeys.studentsMax: Constants.ParseParameterValues.studentsMaxNumber, Constants.ParseParameterKeys.studentOrder: Constants.ParseParameterValues.studentChosenOrder]
         
@@ -177,7 +172,7 @@ class NetworkMethod: UIViewController {
             }
             location.createdAt = studentsLocationDate
             location.objectId = studentsLocationID
-            appDelegate.studentsLocations.append(location)
+            AllStudentLocations.studentsLocations.append(location)
             completionHandler (true, "", nil)
         }
         task.resume()
@@ -232,7 +227,7 @@ func convertToStruct (studentDictionary: [[String: AnyObject]] ){
         let updatedAt = studentLocation["updatedAt"] as! String
         
         let studentObject = StudentInformation(createdAt: createdAt, firstName: firstName, lastName: lastName, latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: mediaURL, objectId: objectId, uniqueKey: uniqueKey, updatedAt: updatedAt)
-            appDelegate!.studentsLocations.append(studentObject)
+            AllStudentLocations.studentsLocations.append(studentObject)
         
     }
 }

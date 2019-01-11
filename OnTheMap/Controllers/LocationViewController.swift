@@ -49,10 +49,11 @@ class LocationViewController: UIViewController, MKMapViewDelegate {
         annotation.subtitle = urlLink
         
         self.annotations.append(annotation)
-
-        self.mapView.addAnnotations(self.annotations)
-
         
+        DispatchQueue.main.async {
+        self.mapView.addAnnotations(self.annotations)
+            }
+           self.mapView.region = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
           }
         }
     }
@@ -65,7 +66,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate {
                     if success == true {
                         self.dismiss(animated: true, completion: nil)
                     }else {
-                        if error != nil || message.isEmpty {
+                        if error != nil || !message.isEmpty {
                             self.showAlert(message: "Could not post your location")
                         }
                     }

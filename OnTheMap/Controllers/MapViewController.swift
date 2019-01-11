@@ -24,9 +24,9 @@ class MapViewController: SharedViewController, MKMapViewDelegate {
         super .viewWillAppear(animated)
         networkObjectSub.getStudentLocation { (success, message, error) in
             if success == true {
-                let locationsArray = self.networkObjectSub.appDelegate?.studentsLocations
+                let locationsArray = AllStudentLocations.studentsLocations
                 
-                for oneLocation in locationsArray! {
+                for oneLocation in locationsArray {
                     
                     let lat = CLLocationDegrees(oneLocation.latitude )
                     let long = CLLocationDegrees(oneLocation.longitude)
@@ -44,8 +44,13 @@ class MapViewController: SharedViewController, MKMapViewDelegate {
                     
                     self.annotations.append(annotation)
                 }
-                
+                DispatchQueue.main.async {
                  self.mapView.addAnnotations(self.annotations)
+                }
+            }else {
+                if error != nil || !message.isEmpty {
+                    self.showAlert(message: "Failed to download students locations")
+                }
             }
         }
     }

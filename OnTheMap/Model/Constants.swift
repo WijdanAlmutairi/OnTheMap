@@ -48,12 +48,8 @@ struct Constants {
     
     struct ParseParameterValues {
         static let studentsMaxNumber = "100"
-        static let studentChosenOrder = "updatedAt"
+        static let studentChosenOrder = "-updatedAt"
     
-    }
-    
-    struct ParseResponseKeys {
-        
     }
 }
 
