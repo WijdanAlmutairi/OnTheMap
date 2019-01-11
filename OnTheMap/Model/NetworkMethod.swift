@@ -11,6 +11,7 @@ import UIKit
 class NetworkMethod: UIViewController {
 
     var appDelegate = UIApplication.shared.delegate as? AppDelegate
+    //var alert = Alert()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,7 @@ class NetworkMethod: UIViewController {
             }
             
             guard let studentsLocationResults = parsedResult["results"] as? [[String: AnyObject]] else {
-                completionHandler (false, "Cannot find key 'results' in \(parsedResult)", error)
+                completionHandler (false, "Cannot find key 'results' in \(String(describing: parsedResult))", error)
                 return
             }
             self.convertToStruct (studentDictionary: studentsLocationResults)
@@ -112,7 +113,7 @@ class NetworkMethod: UIViewController {
         }
         
         guard let account = parsedResult [Constants.UdacityResponseKeys.userAccount] as? [String: AnyObject] else {
-            completionHandler (false, "Cannot find key '\(Constants.UdacityResponseKeys.userAccount)' in \(parsedResult)", error)
+            completionHandler (false, "Cannot find key '\(Constants.UdacityResponseKeys.userAccount)' in \(String(describing: parsedResult))", error)
             return
         }
         guard let userID = account[Constants.UdacityResponseKeys.userID] as? String  else {
@@ -136,7 +137,7 @@ class NetworkMethod: UIViewController {
         request.addValue(Constants.ParseParameterKeys.parseApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(Constants.ParseParameterKeys.RESTAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"Dan\", \"lastName\": \"Cooper\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".data(using: .utf8)
+        request.httpBody = "{\"uniqueKey\": \"\(studentLocation.uniqueKey)\", \"firstName\": \"Dan\", \"lastName\": \"Cooper\",\"mapString\": \"\(studentLocation.mapString)\", \"mediaURL\": \"\(studentLocation.mediaURL)\",\"latitude\": \(studentLocation.latitude), \"longitude\": \(studentLocation.longitude)}".data(using: .utf8)
 
         let task = appDelegate.sharedSession.dataTask(with: request) { data, response, error in
             guard (error == nil) else {
@@ -167,17 +168,17 @@ class NetworkMethod: UIViewController {
             }
             
             guard let studentsLocationDate = parsedResult["createdAt"] as? String else {
-                completionHandler (false, "Cannot find key 'createdAt' in \(parsedResult)", error)
+                completionHandler (false, "Cannot find key 'createdAt' in \(String(describing: parsedResult))", error)
                 return
             }
             guard let studentsLocationID = parsedResult["objectId"] as? String else {
-                completionHandler (false, "Cannot find key 'objectId' in \(parsedResult)", error)
+                completionHandler (false, "Cannot find key 'objectId' in \(String(describing: parsedResult))", error)
                 return
             }
             location.createdAt = studentsLocationDate
             location.objectId = studentsLocationID
+            appDelegate.studentsLocations.append(location)
             completionHandler (true, "", nil)
-            //print(String(data: data, encoding: .utf8)!)
         }
         task.resume()
     }

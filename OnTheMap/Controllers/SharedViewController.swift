@@ -34,8 +34,8 @@ class SharedViewController: UIViewController {
     }
     
     @objc func addTapped(){
-        let InformationPostingVc = self.storyboard?.instantiateViewController(withIdentifier: "InformationPostingViewController") as! InformationPostingViewController
-        self.present(InformationPostingVc, animated: true, completion: nil)
+        let AddToMapVc = self.storyboard?.instantiateViewController(withIdentifier: "AddToMap") as! UINavigationController
+        self.present(AddToMapVc, animated: true, completion: nil)
     }
     
     @objc func refreshTapped(){
@@ -66,7 +66,7 @@ class SharedViewController: UIViewController {
             _ = data?.subdata(in: range) /* subset response data! */
             SharedViewController.appDelegate.sessionID = ""
             DispatchQueue.main.async {
-                let loginController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! UIViewController
+                let loginController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                 self.present(loginController, animated: true, completion: nil)
             }
             

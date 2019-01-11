@@ -277,7 +277,6 @@
                                 </state>
                                 <connections>
                                     <action selector="findLocationPressed:" destination="Oug-Ng-foi" eventType="touchUpInside" id="TpU-MN-2HX"/>
-                                    <segue destination="sEO-qt-Ggp" kind="show" identifier="sendLocation " id="sOW-2l-QdM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -298,11 +297,16 @@
                         <viewLayoutGuide key="safeArea" id="Jmq-f3-BgR"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Location" id="CSx-gh-XIT">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hK1-cB-GWX"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hK1-cB-GWX">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="Oug-Ng-foi" id="NEH-ec-JKs"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapString" destination="DrM-RJ-Czz" id="HpS-pM-p06"/>
                         <outlet property="urlLink" destination="5eH-N7-IuI" id="Rlv-qp-13x"/>
+                        <segue destination="sEO-qt-Ggp" kind="show" identifier="sendLocation" id="1Ve-bQ-ImS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7uI-7l-Be7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -334,6 +338,9 @@
                                 <state key="normal" title="Finish">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="finishPressed:" destination="sEO-qt-Ggp" eventType="touchUpInside" id="8R0-ot-tgN"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -377,7 +384,7 @@
         <!--Navigation Controller-->
         <scene sceneID="uSc-WX-8xt">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vwL-O4-MiQ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AddToMap" automaticallyAdjustsScrollViewInsets="NO" id="vwL-O4-MiQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ONT-bq-ggy">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

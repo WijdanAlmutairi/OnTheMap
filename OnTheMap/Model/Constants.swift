@@ -22,9 +22,6 @@ struct Constants {
         static let password = "password"
     }
     
-//    struct UdacityParameterValues {
-//
-//    }
     
     struct UdacityResponseKeys {
         static let session = "session"

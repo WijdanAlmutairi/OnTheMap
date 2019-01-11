@@ -14,6 +14,9 @@ class InformationPostingViewController: UIViewController {
     var lat = 0.0
     var lon = 0.0
     
+    var myKeyboard = Keyboard()
+    //var alert = Alert()
+    
     @IBOutlet weak var mapString: UITextField!
     @IBOutlet weak var urlLink: UITextField!
     
@@ -21,17 +24,23 @@ class InformationPostingViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        myKeyboard.configureTextField(textField: urlLink!)
     }
 
     @IBAction func findLocationPressed(_ sender: Any) {
-//        guard !mapString.text!.isEmpty, !urlLink.text!.isEmpty else {
-//            print("Loacation or Link fields are empty ")
-//            return
-//        }
+        guard !mapString.text!.isEmpty, !urlLink.text!.isEmpty else {
+            self.showAlert(message: "Loacation or Link fields are empty")
+            print("Loacation or Link fields are empty ")
+            return
+        }
         convertToLocation(address: mapString.text!) { (success, message, error) in
             if success == true {
                 DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "sendLocation ", sender: self)
+                    self.performSegue(withIdentifier: "sendLocation", sender: self)
+                }
+            }else {
+                if error != nil || message.isEmpty {
+                 self.showAlert(message: "Could not post your location")
                 }
             }
         }
@@ -53,6 +62,7 @@ class InformationPostingViewController: UIViewController {
                     let placemarks = placemarks,
                     let location = placemarks.first?.location
                     else {
+                        self.showAlert(message: "Cannot Find Location")
                         print("Cannot Find Location")
                         completionHandler(false, "Cannot Find Location", error)
                         return
@@ -65,5 +75,9 @@ class InformationPostingViewController: UIViewController {
                 
             }
         }
+    }
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
