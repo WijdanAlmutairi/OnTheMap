@@ -18,10 +18,7 @@ class MapViewController: SharedViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super .viewWillAppear(animated)
+        
         networkObjectSub.getStudentLocation { (success, message, error) in
             if success == true {
                 let locationsArray = AllStudentLocations.studentsLocations
@@ -45,7 +42,7 @@ class MapViewController: SharedViewController, MKMapViewDelegate {
                     self.annotations.append(annotation)
                 }
                 DispatchQueue.main.async {
-                 self.mapView.addAnnotations(self.annotations)
+                    self.mapView.addAnnotations(self.annotations)
                 }
             }else {
                 if error != nil || !message.isEmpty {
@@ -53,6 +50,10 @@ class MapViewController: SharedViewController, MKMapViewDelegate {
                 }
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super .viewWillAppear(animated)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

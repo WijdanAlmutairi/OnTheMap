@@ -20,11 +20,7 @@ class TableViewController: SharedViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-    
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
         networkObjectSub.getStudentLocation { (success, message, error) in
             if success == true {
                 DispatchQueue.main.async {
@@ -35,8 +31,12 @@ class TableViewController: SharedViewController, UITableViewDelegate, UITableVie
                     self.showAlert(message: "Failed to download students locations")
                 }
             }
+        }
+    
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return AllStudentLocations.studentsLocations.count

@@ -57,6 +57,7 @@ class NetworkMethod {
                 completionHandler (false, "Cannot find key 'results' in \(String(describing: parsedResult))", error)
                 return
             }
+            print(studentsLocationResults)
             self.convertToStruct (studentDictionary: studentsLocationResults)
             completionHandler (true, "", nil)
         }
@@ -214,17 +215,18 @@ class NetworkMethod {
 func convertToStruct (studentDictionary: [[String: AnyObject]] ){
     
     for studentLocation in studentDictionary {
-        // Condition required to check for type safety :)
-        let createdAt = studentLocation["createdAt"] as! String
-        let firstName = studentLocation["firstName"] as! String
-        let lastName = studentLocation["lastName"] as! String
-        let latitude = studentLocation["latitude"] as! Double
-        let longitude = studentLocation["longitude"] as! Double
-        let mapString = studentLocation["mapString"] as! String
-        let mediaURL = studentLocation["mediaURL"] as! String
-        let objectId = studentLocation["objectId"] as! String
-        let uniqueKey = studentLocation["uniqueKey"] as! String
-        let updatedAt = studentLocation["updatedAt"] as! String
+        
+        
+        let createdAt = studentLocation["createdAt"] as? String ?? "2015-02-24T22:35:30.639Z"
+        let firstName = studentLocation["firstName"] as? String ?? "John"
+        let lastName = studentLocation["lastName"] as? String ?? "Doe"
+        let latitude = studentLocation["latitude"] as? Double ?? 37.322998
+        let longitude = studentLocation["longitude"] as? Double ?? -122.032182
+        let mapString = studentLocation["mapString"] as? String ?? "Cupertino, CA"
+        let mediaURL = studentLocation["mediaURL"] as? String ?? "https://udacity.com"
+        let objectId = studentLocation["objectId"] as? String ?? "8ZEuHF5uX8"
+        let uniqueKey = studentLocation["uniqueKey"] as? String ?? "1234"
+        let updatedAt = studentLocation["updatedAt"] as? String ?? "2015-03-11T02:42:59.217Z"
         
         let studentObject = StudentInformation(createdAt: createdAt, firstName: firstName, lastName: lastName, latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: mediaURL, objectId: objectId, uniqueKey: uniqueKey, updatedAt: updatedAt)
             AllStudentLocations.studentsLocations.append(studentObject)
